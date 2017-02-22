@@ -1,0 +1,115 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use BjyAuthorize\Provider\Role\ProviderInterface;
+use ZfcUser\Entity\UserInterface;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ */
+class User
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=45, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="display_name", type="string", length=45, nullable=true)
+     */
+    private $displayName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, nullable=true)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=60, nullable=false)
+     */
+    private $password;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="state", type="boolean", nullable=false)
+     */
+    private $state = '0';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Application\Entity\UserRole", inversedBy="user")
+     * @ORM\JoinTable(name="user_has_user_role",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="user_role_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $userRole;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userRole = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

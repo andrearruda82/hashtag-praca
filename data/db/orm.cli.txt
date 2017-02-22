@@ -1,0 +1,3 @@
+php public/index.php orm:convert-mapping --namespace="Application\\Entity\\" --filter="User" --from-database annotation ./module/Application/src/
+php public/index.php orm:generate-entities --filter="Application" ./module/Application/src/ --generate-annotations=true
+php public/index.php orm:generate-repositories ./module/Application/src/ --filter="User"

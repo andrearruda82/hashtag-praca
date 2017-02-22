@@ -1,0 +1,68 @@
+<?php
+$this->inlineScript()
+    ->prependFile($this->basePath('/assets/js/pages/campaign.js'))
+    ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery-inputmask/jquery.inputmask.bundle.js'));
+?>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>Campanha</h2>
+            </div>
+            <div class="body">
+                <?php echo $this->form()->openTag($form) . PHP_EOL; ?>
+                <?php echo $this->formElement($form->get('csrf')) . PHP_EOL;?>
+                <?php echo $this->formElement($form->get('id')) . PHP_EOL;?>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line<?php if ($this->formElementErrors($form->get('name'))) :?> focused error<?php endif;?>">
+                                <?php echo $this->formElement($form->get('name')) . PHP_EOL;?>
+                                <?php echo $this->formLabel($form->get('name')) . PHP_EOL; ?>
+                            </div>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('name')) . PHP_EOL; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-sm-6">
+                        <div class="form-group form-float">
+                            <div class="form-line<?php if ($this->formElementErrors($form->get('period_start'))) :?> focused error<?php endif;?>">
+                                <?php echo $this->formElement($form->get('period_start')) . PHP_EOL;?>
+                                <?php echo $this->formLabel($form->get('period_start')) . PHP_EOL; ?>
+                            </div>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('period_start')) . PHP_EOL; ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-float">
+                            <div class="form-line<?php if ($this->formElementErrors($form->get('period_final'))) :?> focused error<?php endif;?>">
+                                <?php echo $this->formElement($form->get('period_final')) . PHP_EOL;?>
+                                <?php echo $this->formLabel($form->get('period_final')) . PHP_EOL; ?>
+                            </div>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('period_final')) . PHP_EOL; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-default btn-lg waves-effect pull-right">Salvar</button>
+                    </div>
+                </div>
+                <?php echo $this->form()->closeTag() . PHP_EOL; ?>
+            </div>
+        </div>
+    </div>
+</div>

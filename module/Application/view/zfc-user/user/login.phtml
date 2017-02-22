@@ -1,0 +1,51 @@
+<?php
+
+$form = $this->loginForm;
+$form->setAttributes(['class' => 'form']);
+$form->prepare();
+?>
+        <div class="login-box">
+            <div class="logo">
+                <img src="<?php echo $this->basePath('/assets/images/logo_pracacapital.png');?>" class="center-block">
+            </div>
+            <div class="card">
+                <div class="body">
+                    <div class="msg">Faça login para iniciar uma sessão</div>
+                    <form method="POST" class="form" id="sign_in">
+<?php if ($this->redirect) : ?>
+                        <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
+<?php endif ?>
+                        <div class="input-group error">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="form-line">
+                                <?php echo $this->formInput($form->get('identity')->setAttributes(['class' => 'form-control', 'placeholder' => '', 'autocomplete' => 'off'])) . PHP_EOL; ?>
+                            </div>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('identity')) . PHP_EOL; ?>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock</i>
+                            </span>
+                            <div class="form-line">
+                                <?php echo $this->formInput($form->get('credential')->setAttributes(['class' => 'form-control', 'placeholder' => ''])) . PHP_EOL; ?>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a href="forgot-password.html">Esqueceu a senha?</a>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn bg-pink waves-effect pull-right" type="submit">ENTRAR</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>

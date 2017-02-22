@@ -1,0 +1,24 @@
+{
+  "name": "FS App",
+  "authors": [
+    "Andre Arruda <andrearruda82@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": ">=3.0.0",
+    "font-awesome": "^4.6.2",
+    "bootbox.js": "4.4.0",
+    "adminbsb-materialdesign": "^1.0.4"
+  }
+}

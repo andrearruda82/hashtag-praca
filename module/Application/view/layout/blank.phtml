@@ -1,0 +1,52 @@
+<?php echo $this->doctype(); ?>
+<html lang="pt-br">
+    <head>
+        <?php
+        echo $this->headTitle('Praça Capital - Instagram')
+                ->setSeparator(' / ')
+                ->setAutoEscape(false)
+            . PHP_EOL;
+        ?>
+        <!-- BEGIN META -->
+        <meta charset="UTF-8" />
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+            . PHP_EOL;
+        ?>
+        <!-- END META -->
+
+        <!-- BEGIN STYLESHEETS -->
+        <?php
+        echo $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('/assets/images/favicon_pracacapital.png')])
+                ->prependStylesheet($this->basePath('/assets/css/style.css'))
+                ->prependStylesheet($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/node-waves/waves.min.css'))
+                ->prependStylesheet($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap/css/bootstrap.min.css'))
+                ->prependStylesheet('https://fonts.googleapis.com/icon?family=Material+Icons')
+                ->prependStylesheet('https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext')
+            . PHP_EOL;
+        ?>
+        <!-- END STYLESHEETS -->
+
+        <!-- BEGIN JAVASCRIPT -->
+        <?php
+        echo $this->headScript()
+                ->appendFile($this->basePath('/assets/js/common/respond.min.js'), 'text/javascript', ['conditional' => 'lt IE 9',])
+                ->appendFile($this->basePath('/assets/js/common/html5shiv.min.js'), 'text/javascript', ['conditional' => 'lt IE 9',])
+            . PHP_EOL;
+        ?>
+        <!-- END JAVASCRIPT -->
+    </head>
+    <body class="login-page">
+<?php echo $this->content . PHP_EOL; ?>
+<?php
+    echo $this->inlineScript()
+            ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/js/admin.js'))
+            ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/node-waves/waves.min.js'))
+            ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery/jquery.min.js'))
+        . PHP_EOL;
+?>
+    </body>
+</html>
