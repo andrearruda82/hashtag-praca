@@ -34,7 +34,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a href="<?php echo $this->url('campaign/default', ['action' => 'edit', 'id' => $entity->getId()]);?>"><i class="material-icons">mode_edit</i> Editar</a></li>
-                                        <li><a href="<?php echo $this->url('campaign/default', ['action' => 'delete', 'id' => $entity->getId()]);?>"><i class="material-icons">delete</i> Deletar</a></li>
+                                        <li><a href="javascript:void(0);" class="bt_action_confirm_delete" data-url="<?php echo $this->url('campaign/default', ['action' => 'delete', 'id' => $entity->getId()]);?>" data-object-delete="<?php echo $entity->getName();?>"><i class="material-icons">delete</i> Deletar</a></li>
                                     </ul>
                                 </div>
                             </td>
