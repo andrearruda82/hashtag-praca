@@ -55,6 +55,22 @@ class CampaignFilter extends InputFilter
                     'options' => [
                         'format' => 'd/m/Y',
                     ]
+                ],
+                [
+                    'name' => 'Callback',
+                    'break_chain_on_failure' => true,
+                    'options' => [
+                        'messages' => [
+                            \Zend\Validator\Callback::INVALID_VALUE => 'Periodo inválido, data início maior que a data final.'
+                        ],
+                        'callback' => function($value, $context = []) {
+
+                            $period_start = \DateTime::createFromFormat('d/m/Y', $value);
+                            $period_final = \DateTime::createFromFormat('d/m/Y', $context['period_final']);
+
+                            return $period_start > $period_final ? false : true;
+                        }
+                    ]
                 ]
             ]
         ]);

@@ -34,6 +34,7 @@
         <!-- BEGIN JAVASCRIPT -->
         <?php
         echo $this->headScript()
+                ->appendFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery/jquery.min.js'))
                 ->appendFile($this->basePath('/assets/js/common/respond.min.js'), 'text/javascript', ['conditional' => 'lt IE 9',])
                 ->appendFile($this->basePath('/assets/js/common/html5shiv.min.js'), 'text/javascript', ['conditional' => 'lt IE 9',])
             . PHP_EOL;
@@ -41,6 +42,7 @@
         <!-- END JAVASCRIPT -->
     </head>
     <body class="theme-orange">
+<?php echo $this->partial('partials/layout/flash_message.phtml');?>
         <!-- Page Loader -->
         <div class="page-loader-wrapper">
             <div class="loader">
@@ -138,7 +140,6 @@
             ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.min.js'))
             ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/node-waves/waves.min.js'))
             ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.min.js'))
-            ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery/jquery.min.js'))
         . PHP_EOL;
 ?>
     </body>

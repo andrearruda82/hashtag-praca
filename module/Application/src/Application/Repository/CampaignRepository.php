@@ -10,4 +10,8 @@ namespace Application\Repository;
  */
 class CampaignRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll()
+    {
+        return parent::findBy([], ['createdAt' => 'DESC']);
+    }
 }

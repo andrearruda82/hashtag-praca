@@ -44,4 +44,32 @@ class CampaignService
             return $e;
         }
     }
+
+    public function update($id, $data)
+    {
+        if (isset($data['period_start']))
+        {
+            $data['period_start'] = \DateTime::createFromFormat('d/m/Y', $data['period_start']);
+        }
+
+        if (isset($data['period_final']))
+        {
+            $data['period_final'] = \DateTime::createFromFormat('d/m/Y', $data['period_final']);
+        }
+
+        $campaign = $this->entityManager->getReference('Application\Entity\Campaign', $id);
+        $this->doctrineObject->hydrate($data, $campaign);
+
+        $this->entityManager->getConnection()->beginTransaction();
+        try {
+            $this->entityManager->persist($campaign);
+            $this->entityManager->flush();
+            $this->entityManager->getConnection()->commit();
+
+            return $campaign;
+        } catch (\Exception $e) {
+            $this->entityManager->getConnection()->rollBack();
+            return $e;
+        }
+    }
 }

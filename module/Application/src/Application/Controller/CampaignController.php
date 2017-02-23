@@ -92,14 +92,40 @@ class CampaignController extends AbstractActionController
 
         $campaign = $this->campaignRepository->findOneById($id);
         $data = (new ClassMethods())->extract($campaign);
+        $data['period_start'] = $data['period_start']->format('d/m/Y');
+        $data['period_final'] = $data['period_final']->format('d/m/Y');
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = array_merge(
                 $this->getRequest()->getPost()->toArray()
             );
-        }
 
+            $this->campaignForm->setData($data);
+
+            if ($this->campaignForm->isValid())
+            {
+                $result = $this->campaignService->update($id, $data);
+
+                if ($result instanceof \Application\Entity\Campaign) {
+                    $this->flashMessenger()->addMessage([
+                        'type' => 'success',
+                        'title' => 'Yeah!',
+                        'message' => 'Ação realizada c/ sucesso!'
+                    ]);
+
+                    return $this->redirect()->toRoute('campaign');
+                }
+
+                $this->flashMessenger()->addMessage([
+                    'type' => 'error',
+                    'title' => 'Ops!',
+                    'message' => 'Falha ao realizar ação.'
+                ]);
+
+                return $this->redirect()->toRoute('campaign');
+            }
+        }
 
         $viewModel = new ViewModel([
             'form' => $this->campaignForm->setData($data)

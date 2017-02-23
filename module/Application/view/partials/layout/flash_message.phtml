@@ -1,0 +1,36 @@
+<?php
+$flashMessage = $this->flashMessenger()->getMessages();
+if (count($flashMessage)) :
+    $this->inlineScript()
+        ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap-notify/bootstrap-notify.min.js'))
+?>
+<!-- BEGIN FLASHMESSENGER-->
+    <script type="text/javascript">
+        $(function () {
+<?php foreach ($flashMessage as $key => $msg): ?>
+            setTimeout(function() {
+                $.notify({
+                        title: "<?php echo htmlspecialchars(preg_replace("/\r|\n/", "", $msg['title']), ENT_QUOTES);?>",
+                        message: "<?php echo htmlspecialchars(preg_replace("/\r|\n/", "", $msg['message']), ENT_QUOTES);?>",
+                    },
+                    {
+                        type: "<?php echo $msg['type'];?>",
+                        newest_on_top: true,
+                        animate: {
+                            enter: 'animated bounceInRight',
+                            exit: 'animated bounceOutRight'
+                        },
+                        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-dismissible alert-{0}" role="alert">' +
+                        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                        '<img data-notify="icon" class="img-circle pull-left">' +
+                        '<div data-notify="title"><strong>{1}</strong></div>' +
+                        '<div data-notify="message">{2}</div>' +
+                        '</div>'
+                    }
+                );
+            }, <?php echo ($key * 2000);?>);
+<?php endforeach; ?>
+        });
+    </script>
+<!-- END FLASHMESSENGER-->
+<?php endif; ?>
