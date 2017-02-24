@@ -134,4 +134,29 @@ class CampaignController extends AbstractActionController
 
         return $viewModel;
     }
+
+    public function deleteAction()
+    {
+        $id = $this->params()->fromRoute('id');
+
+        $result = $this->campaignService->delete($id);
+
+        if ($result === true) {
+            $this->flashMessenger()->addMessage([
+                'type' => 'success',
+                'title' => 'Yeah!',
+                'message' => 'Ação realizada c/ sucesso!'
+            ]);
+
+            return $this->redirect()->toRoute('campaign');
+        }
+
+        $this->flashMessenger()->addMessage([
+            'type' => 'error',
+            'title' => 'Ops!',
+            'message' => 'Falha ao realizar ação.'
+        ]);
+
+        return $this->redirect()->toRoute('campaign');
+    }
 }

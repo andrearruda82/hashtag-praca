@@ -1,7 +1,15 @@
 <?php
+$this->headLink()
+    ->prependStylesheet($this->basePath('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'))
+;
+
 $this->inlineScript()
     ->prependFile($this->basePath('/assets/js/pages/campaign.js'))
-    ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery-inputmask/jquery.inputmask.bundle.js'));
+    ->prependFile($this->basePath('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'))
+    ->prependFile($this->basePath('/assets/bower_components/moment/locale/pt-br.js'))
+    ->prependFile($this->basePath('/assets/bower_components/moment/min/moment.min.js'))
+
+;
 
 $class = [];
 $inputs = ['name', 'period_start', 'period_final'];

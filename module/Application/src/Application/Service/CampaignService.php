@@ -72,4 +72,21 @@ class CampaignService
             return $e;
         }
     }
+
+    public function delete($id)
+    {
+        $campaign = $this->entityManager->getReference('Application\Entity\Campaign', $id);
+
+        $this->entityManager->getConnection()->beginTransaction();
+        try {
+            $this->entityManager->remove($campaign);
+            $this->entityManager->flush();
+            $this->entityManager->getConnection()->commit();
+
+            return true;
+        } catch (\Exception $e) {
+            $this->entityManager->getConnection()->rollBack();
+            return $e;
+        }
+    }
 }
