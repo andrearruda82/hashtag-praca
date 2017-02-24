@@ -129,6 +129,7 @@
             <div class="container-fluid">
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<?php echo $this->navigation('navigation')->breadcrumbs()->setPartial('partials/navigation/breadcrumb') . PHP_EOL; ?>
 <?php echo $this->content . PHP_EOL; ?>
                     </div>
                 </div>

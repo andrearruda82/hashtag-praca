@@ -1,28 +1,21 @@
-<?php
-if (empty($this->pages)) {
-    return;
-}
-
-$lastPageIndex = count($this->pages) - 1;
-$lastPage = null;
-?>
 <!-- BEGIN BREADCRUMB -->
 <ol class="breadcrumb">
-    <li>
-        <a href="<?php echo $this->url('home') ?>">Home</a>
+<?php
+    /**
+     * @var  $key
+     * @var \Zend\Navigation\Page\Mvc $page
+     */
+    foreach ($this->pages as $key => $page):
+?>
+    <li<?php echo ($page->getActive() == true ? ' class="active"' : ''); ?>>
+<?php if (! $page->getActive()): ?>
+        <a href="<?php echo $page->getHref(); ?>"><?php echo $page->getLabel();?></a>
+<?php else: ?>
+        <?php echo $page->getLabel() . PHP_EOL;?>
+<?php endif; ?>
     </li>
 <?php
-foreach ($this->pages as $key => $page) :
-    $this->headTitle()->prepend($page->getLabel());
-
+    endforeach;
 ?>
-<li <?php echo ! ($key < $lastPageIndex) ? 'class="active"' : '' ?>>
-<?php if ($key < $lastPageIndex) :?>
-        <a href="<?php echo $page->getHref(); ?>"><?php echo $page->getLabel(); ?></a>
-<?php else : ?>
-        <?php echo $page->getLabel() . PHP_EOL;?>
-<?php endif;?>
-</li>
-<?php     endforeach;?>
 </ol>
 <!-- END BREADCRUMB -->

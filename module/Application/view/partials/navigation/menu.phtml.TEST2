@@ -1,0 +1,57 @@
+<?php
+/**
+ * @var $container Zend\Navigation\Navigation
+ * @var $page Zend\Navigation\Page\Mvc
+ */
+$container = $this->container;
+?>
+<!-- BEGIN MAIN MENU -->
+<ul class="list">
+    <li class="header">NAVEGAÇÃO</li>
+<?php
+foreach ($container as $page) :
+    if ($page->get('show_in_menu') !== false) :
+?>
+    <!-- BEGIN <?php echo strtoupper($page->getLabel());?> -->
+<?php if (! $page->hasPages()) :?>
+    <li<?php if ($page->isActive()) {echo ' class="active expanded"';} ?>>
+        <a href="<?php echo $page->getHref(); ?>">
+<?php if ($page->get('icon') !== '') :?>
+            <i class="material-icons"><?php echo $page->get('icon'); ?></i>
+<?php endif;?>
+            <span class="title"><?php echo $page->getLabel();?></span>
+        </a>
+    </li>
+<?php else :?>
+    <li class="<?php if ($page->isActive(true)) {echo ' active expanded';} ?>">
+        <a href="<?php echo $page->getHref(); ?>">
+<?php if ($page->get('icon') !== '') :?>
+            <i class="material-icons"><?php echo $page->get('icon'); ?></i>
+<?php endif;?>
+            <span class="title"><?php echo $page->getLabel();?></span>
+        </a>
+        <ul class="ml-menu">
+<?php
+foreach ($page->getPages() as $child) :
+    if ($child->get('show_in_menu') !== false) :
+?>
+        <li<?php if ($child->isActive(true)) {echo ' class="active expanded"';} ?>>
+            <a href="<?php echo $child->getHref() ?>">
+                <span class="title"><?php echo $child->getLabel();?></span>
+            </a>
+        </li>
+<?php
+    endif;
+endforeach;
+?>
+        </ul>
+    </li>
+<?php endif;?>
+    <!-- END <?php echo strtoupper($page->getLabel());?> -->
+
+<?php
+    endif;
+endforeach;
+?>
+</ul>
+<!-- END MAIN MENU -->
