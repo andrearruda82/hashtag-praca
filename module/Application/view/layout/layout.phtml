@@ -1,4 +1,4 @@
-<?php echo $this->doctype(); ?>
+<?php echo $this->doctype() . PHP_EOL; ?>
 <html lang="pt-br">
     <head>
         <?php
@@ -102,7 +102,22 @@
                 <!-- Menu -->
                 <div class="menu">
                     <div class="slimScrollDiv">
-                        <?php echo $this->navigation('navigation')->menu()->setPartial('partials/navigation/menu');?>
+<?php
+/*    echo $this->navigation('navigation')
+        ->menu()
+        ->renderMenu(null, [
+            'maxDepth' => 1,
+            'ulClass' => 'list'
+        ])
+    ;*/
+?>
+<?php
+    echo $this->navigation('navigation')
+        ->menu()
+        ->setUlClass('list')
+        ->setMaxDepth(1)
+        ->setPartial('partials/navigation/menu');
+?>
                     </div>
                 </div>
                 <!-- #Menu -->

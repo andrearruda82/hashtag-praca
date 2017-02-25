@@ -8,34 +8,37 @@ $container = $this->container;
 <!-- BEGIN MAIN MENU -->
 <ul class="list">
     <li class="header">NAVEGAÇÃO</li>
-<?php
-foreach ($container as $page) :
-?>
+<?php foreach ($container as $page) :?>
     <!-- BEGIN <?php echo strtoupper($page->getLabel());?> -->
-    <li<?php if ($page->isActive()) {echo ' class="active"';} ?>>
-        <a href="<?php echo $page->getHref(); ?>" class="<?php if ($page->hasPages()) {echo 'menu-toggle ';} ?>waves-effect waves-block">
-<?php   if ($page->get('icon') !== '') :?>
+<?php   if (! $page->hasPages()) :?>
+    <li<?php if ($page->isActive()) {echo ' class="active expanded"';} ?>>
+        <a href="<?php echo $page->getHref(); ?>">
+<?php       if ($page->get('icon') !== '') :?>
             <i class="material-icons"><?php echo $page->get('icon'); ?></i>
-<?php   endif;?>
-            <span><?php echo $page->getLabel();?></span>
+<?php       endif;?>
+            <span class="title"><?php echo $page->getLabel();?></span>
         </a>
-<?php if ($page->hasPages()) :?>
-        <ul class="ml-menu">
-<?php
-        foreach ($page->getPages() as $child) :
-?>
-            <li<?php if ($child->isActive(true)) {echo ' class="active"';} ?>>
-                <a href="<?php echo $child->getHref() ?>"><?php echo $child->getLabel();?></a>
-            </li>
-<?php
-        endforeach;
-?>
-        </ul>
-<?php endif;?>
     </li>
+<?php   else :?>
+    <li class="<?php if ($page->isActive(true)) {echo ' active expanded';} ?>">
+        <a href="<?php echo $page->getHref(); ?>" class="menu-toggle">
+<?php       if ($page->get('icon') !== '') :?>
+            <i class="material-icons"><?php echo $page->get('icon'); ?></i>
+<?php       endif;?>
+            <span class="title"><?php echo $page->getLabel();?></span>
+        </a>
+        <ul class="ml-menu">
+<?php       foreach ($page->getPages() as $child) :?>
+            <li<?php if ($child->isActive(true)) {echo ' class="active"';} ?>>
+                <a href="<?php echo $child->getHref() ?>">
+                    <span class="title"><?php echo $child->getLabel();?></span>
+                </a>
+            </li>
+<?php       endforeach; ?>
+        </ul>
+    </li>
+<?php   endif;?>
     <!-- END <?php echo strtoupper($page->getLabel());?> -->
-<?php
-endforeach;
-?>
+<?php endforeach; ?>
 </ul>
 <!-- END MAIN MENU -->
