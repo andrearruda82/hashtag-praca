@@ -1,14 +1,16 @@
 <?php
 $this->headLink()
-    ->prependStylesheet($this->basePath('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'))
+    ->appendStylesheet($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css'))
+;
+
+$this->headScript()
+    ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js'))
+    ->prependFile($this->basePath('/assets/bower_components/moment/locale/pt-br.js'))
+    ->prependFile($this->basePath('/assets/bower_components/moment/min/moment.min.js'))
 ;
 
 $this->inlineScript()
     ->prependFile($this->basePath('/assets/js/pages/campaign.js'))
-    ->prependFile($this->basePath('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'))
-    ->prependFile($this->basePath('/assets/bower_components/moment/locale/pt-br.js'))
-    ->prependFile($this->basePath('/assets/bower_components/moment/min/moment.min.js'))
-
 ;
 
 $class = [];

@@ -1,19 +1,21 @@
 $(function () {
-    $('#period_start').datetimepicker({
+    $('#period_final').bootstrapMaterialDatePicker({
+        lang: 'pt-BR',
+        weekStart: 0,
         format: 'DD/MM/YYYY',
-        locale: 'pt-br'
+        time: false
+    }).on('focus', function (e, date) {
+        $(this).parent().addClass('focused');
     });
 
-    $('#period_final').datetimepicker({
+    $('#period_start').bootstrapMaterialDatePicker({
+        lang: 'pt-BR',
+        weekStart: 0,
         format: 'DD/MM/YYYY',
-        locale: 'pt-br',
-        useCurrent: false
-    });
-
-    $("#period_start").on("dp.change", function (e) {
-        $('#period_final').data("DateTimePicker").minDate(e.date);
-    });
-    $("#period_final").on("dp.change", function (e) {
-        $('#period_start').data("DateTimePicker").maxDate(e.date);
+        time: false
+    }).on('change', function(e, date) {
+        $('#period_final').bootstrapMaterialDatePicker('setMinDate', date);
+    }).on('focus', function (e, date) {
+        $(this).parent().addClass('focused');
     });
 });
