@@ -1,43 +1,66 @@
 <?php
-/**
- * @var $container Zend\Navigation\Navigation
- * @var $page Zend\Navigation\Page\Mvc
- */
-$container = $this->container;
+/** @var $page Zend\Navigation\Page\Mvc */
+/** @var $child Zend\Navigation\Page\Mvc */
+/** @var $subchild Zend\Navigation\Page\Mvc */
 ?>
 <!-- BEGIN MAIN MENU -->
 <ul class="list">
     <li class="header">NAVEGAÇÃO</li>
-<?php foreach ($container as $page) :?>
+<?php foreach ($this->container as $page) :?>
     <!-- BEGIN <?php echo strtoupper($page->getLabel());?> -->
-<?php   if (! $page->hasPages()) :?>
-    <li<?php if ($page->isActive()) {echo ' class="active expanded"';} ?>>
-        <a href="<?php echo $page->getHref(); ?>">
+    <li<?php echo $page->isActive(true) == true ? ' class="active"' : '';?>>
+        <a href="<?php echo $page->getHref();?>"<?php echo $page->hasPages() == true ? ' class="menu-toggle"' : '';?>>
 <?php       if ($page->get('icon') !== '') :?>
             <i class="material-icons"><?php echo $page->get('icon'); ?></i>
 <?php       endif;?>
-            <span class="title"><?php echo $page->getLabel();?></span>
+            <span><?php echo $page->getLabel();?></span>
         </a>
-    </li>
-<?php   else :?>
-    <li class="<?php if ($page->isActive(true)) {echo ' active expanded';} ?>">
-        <a href="<?php echo $page->getHref(); ?>" class="menu-toggle">
-<?php       if ($page->get('icon') !== '') :?>
-            <i class="material-icons"><?php echo $page->get('icon'); ?></i>
-<?php       endif;?>
-            <span class="title"><?php echo $page->getLabel();?></span>
-        </a>
+<?php       if($page->hasPages()):?>
         <ul class="ml-menu">
-<?php       foreach ($page->getPages() as $child) :?>
-            <li<?php if ($child->isActive(true)) {echo ' class="active"';} ?>>
-                <a href="<?php echo $child->getHref() ?>">
-                    <span class="title"><?php echo $child->getLabel();?></span>
+<?php
+                foreach ($page->getPages() as $child):
+                    $hasPages = false;
+                    foreach ($child->getPages() as $subchild)
+                    {
+                        if($subchild->getVisible() == true)
+                        {
+                            $hasPages = true;
+                            break;
+                        }
+                    }
+?>
+            <!-- BEGIN <?php echo strtoupper($child->getLabel());?> (LEVEL 1)-->
+            <li<?php echo $child->isActive(true) == true ? ' class="active"' : '';?>>
+                <a href="<?php echo $child->getHref();?>"<?php echo $child->hasPages() == true && $hasPages == true ? ' class="menu-toggle"' : '';?>>
+<?php               if($hasPages == true):?>
+                    <span><?php echo $child->getLabel();?></span>
+<?php               else:?>
+                    <?php echo $child->getLabel() . PHP_EOL;?>
+<?php               endif;?>
                 </a>
+<?php               if($child->hasPages()):?>
+                <ul class="ml-menu">
+<?php
+                        foreach ($child->getPages() as $subchild):
+                            if($subchild->getVisible()):
+?>
+                    <!-- BEGIN <?php echo strtoupper($subchild->getLabel());?> (LEVEL 2) -->
+                    <li<?php echo $subchild->isActive(true) == true ? ' class="active"' : '';?>>
+                        <a href="<?php echo $subchild->getHref();?>"><?php echo $subchild->getLabel();?></a>
+                    </li>
+                    <!-- END <?php echo strtoupper($subchild->getLabel());?> (LEVEL 2) -->
+<?php
+                            endif;
+                        endforeach;
+?>
+                </ul>
+<?php               endif;?>
             </li>
-<?php       endforeach; ?>
+            <!-- END <?php echo strtoupper($child->getLabel());?> (LEVEL 1) -->
+<?php           endforeach;?>
         </ul>
+<?php       endif;?>
     </li>
-<?php   endif;?>
     <!-- END <?php echo strtoupper($page->getLabel());?> -->
 <?php endforeach; ?>
 </ul>

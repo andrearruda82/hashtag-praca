@@ -6,7 +6,7 @@ return [
                 'label' => 'Home',
                 'route' => 'home',
                 'action' => 'index',
-                'icon' => 'home'
+                'icon' => 'home',
             ],
             'registration' => [
                 'label' => 'Cadastros',
@@ -16,17 +16,19 @@ return [
                     'campaign' => [
                         'label' => 'Campanhas',
                         'route' => 'campaign',
-                        'action' => 'index',
+                        'icon' => 'assignment',
                         'pages' => [
                             'add' => [
                                 'label' => 'Adicionar',
                                 'route' => 'campaign/default',
                                 'action' => 'add',
+                                'visible' => false
                             ],
                             'edit' => [
                                 'label' => 'Editar',
                                 'route' => 'campaign/default',
-                                'action' => 'edit'
+                                'action' => 'edit',
+                                'visible' => false
                             ]
                         ]
                     ],
