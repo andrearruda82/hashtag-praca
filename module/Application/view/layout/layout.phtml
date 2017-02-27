@@ -140,7 +140,7 @@
         </section>
 <?php
     echo $this->inlineScript()
-            ->appendFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/js/admin.js'))
+            ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/js/admin.js'))
         . PHP_EOL;
 ?>
     </body>
