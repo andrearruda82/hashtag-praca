@@ -4,8 +4,6 @@ $(function () {
         weekStart: 0,
         format: 'DD/MM/YYYY',
         time: false
-    }).on('focus', function (e, date) {
-        $(this).parent().addClass('focused');
     });
 
     $('#period_start').bootstrapMaterialDatePicker({
@@ -15,7 +13,5 @@ $(function () {
         time: false
     }).on('change', function(e, date) {
         $('#period_final').bootstrapMaterialDatePicker('setMinDate', date);
-    }).on('focus', function (e, date) {
-        $(this).parent().addClass('focused');
-    });
+    })
 });
