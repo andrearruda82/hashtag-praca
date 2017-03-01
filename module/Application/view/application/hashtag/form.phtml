@@ -1,6 +1,7 @@
 <?php
 $this->headLink()
     ->appendStylesheet($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap-select/css/bootstrap-select.min.css'))
+    ->appendStylesheet($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery-spinner/css/bootstrap-spinner.min.css'))
 ;
 
 $this->inlineScript()
@@ -9,6 +10,7 @@ $this->inlineScript()
 
 $this->headScript()
     ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.min.js'))
+    ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/jquery-spinner/js/jquery.spinner.min.js'))
 ;
 ?>
 <div class="row clearfix">
@@ -22,20 +24,7 @@ $this->headScript()
                 <?php echo $this->formElement($form->get('csrf')) . PHP_EOL;?>
                 <?php echo $this->formElement($form->get('id')) . PHP_EOL;?>
                 <div class="row clearfix">
-                    <div class="col-sm-6">
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <?php echo $this->formElement($form->get('tag')) . PHP_EOL;?>
-                                <?php echo $this->formLabel($form->get('tag')) . PHP_EOL; ?>
-                            </div>
-                            <?php echo $this->formElementErrors()
-                                    ->setMessageOpenFormat('<label class="error">')
-                                    ->setMessageSeparatorString('</label><label class="error">')
-                                    ->setMessageCloseString('</label>')
-                                    ->render($form->get('tag')) . PHP_EOL; ?>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <?php echo $this->formElement($form->get('campaign')) . PHP_EOL;?>
@@ -46,6 +35,35 @@ $this->headScript()
                                     ->setMessageSeparatorString('</label><label class="error">')
                                     ->setMessageCloseString('</label>')
                                     ->render($form->get('campaign')) . PHP_EOL; ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group spinner" data-trigger="spinner">
+                            <div class="form-line">
+                                <?php echo $this->formElement($form->get('run_time_script')) . PHP_EOL;?>
+                            </div>
+                            <span class="input-group-addon">
+                                <a href="javascript:;" class="spin-up" data-spin="up"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                                <a href="javascript:;" class="spin-down" data-spin="down"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                            </span>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('run_time_script')) . PHP_EOL; ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <?php echo $this->formElement($form->get('tag')) . PHP_EOL;?>
+                                <?php echo $this->formLabel($form->get('tag')) . PHP_EOL; ?>
+                            </div>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('tag')) . PHP_EOL; ?>
                         </div>
                     </div>
                 </div>

@@ -29,5 +29,28 @@ class HashtagFilter extends InputFilter
                 ],
             ]
         ]);
+
+        $this->add([
+            'name' => 'run_time_script',
+            'required' => true,
+            'filters' => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim']
+            ],
+            'validators' => [
+                [
+                    'name' => 'NotEmpty',
+                    'break_chain_on_failure' => true,
+                ],
+                [
+                    'name' => 'Between',
+                    'break_chain_on_failure' => true,
+                    'options' => [
+                        'min' => 5,
+                        'max' => 60,
+                    ]
+                ],
+            ]
+        ]);
     }
 }

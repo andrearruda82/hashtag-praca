@@ -31,6 +31,13 @@ class Hashtag
     private $tag;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="run_time_script", type="integer", nullable=false)
+     */
+    private $runTimeScript;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
@@ -97,6 +104,30 @@ class Hashtag
     public function getTag()
     {
         return $this->tag;
+    }
+
+    /**
+     * Set runTimeScript
+     *
+     * @param integer $runTimeScript
+     *
+     * @return Hashtag
+     */
+    public function setRunTimeScript($runTimeScript)
+    {
+        $this->runTimeScript = $runTimeScript;
+
+        return $this;
+    }
+
+    /**
+     * Get runTimeScript
+     *
+     * @return integer
+     */
+    public function getRunTimeScript()
+    {
+        return $this->runTimeScript;
     }
 
     /**

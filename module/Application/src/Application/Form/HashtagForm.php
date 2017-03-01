@@ -49,6 +49,9 @@ class HashtagForm extends Form
             'options' => [
                 'object_manager' => $entityManager,
                 'target_class' => 'Application\Entity\Campaign',
+                'label_generator' => function ($campaign) {
+                    return sprintf('%s (%s à %s)', $campaign->getName(), $campaign->getPeriodStart()->format('d/m'), $campaign->getPeriodFinal()->format('d/m'));
+                },
                 'property' => 'name',
                 'display_empty_item' => true,
                 'empty_item_label' => 'Escolha um campanha',
@@ -67,6 +70,26 @@ class HashtagForm extends Form
             'attributes' => [
                 'id' => 'campaign',
                 'class' => 'form-control'
+            ],
+        ]);
+
+        $this->add([
+            'type' => 'Zend\Form\Element\Text',
+            'name' => 'run_time_script',
+            'options' => [
+                'label' => 'Tempo',
+                'label_attributes' => [
+                    'class'  => 'form-label'
+                ]
+            ],
+            'attributes' => [
+                'id' => 'run_time_script',
+                'required' => true,
+                'class' => 'form-control text-center',
+                'data-max' => 60,
+                'data-min' => 0,
+                'data-step' => 5,
+                'data-rule' => 'quantity'
             ],
         ]);
     }

@@ -26,6 +26,7 @@ $this->headScript()
                         <tr>
                             <th class="hidden-xs">Criado em</th>
                             <th class="hidden-xs">Atualizado em</th>
+                            <th>Tempo</th>
                             <th>Nome</th>
                             <th class="text-right">Ações</th>
                         </tr>
@@ -35,6 +36,7 @@ $this->headScript()
                         <tr>
                             <td class="hidden-xs" width="190"><?php echo $this->dateFormat($entity->getCreatedAt(), IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT, 'pt_BR');?></td>
                             <td class="hidden-xs" width="190"><?php echo $this->dateFormat($entity->getUpdatedAt(), IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT, 'pt_BR') ;?></td>
+                            <td><?php echo $entity->getRunTimeScript();?> min.</td>
                             <td><?php echo $entity->getTag();?></td>
                             <td>
                                 <div class="btn-group pull-right">
