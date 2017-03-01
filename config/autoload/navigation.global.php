@@ -32,6 +32,25 @@ return [
                             ]
                         ]
                     ],
+                    'hashtag' => [
+                        'label' => 'Hashtags',
+                        'route' => 'hashtag',
+                        'icon' => 'assignment',
+                        'pages' => [
+                            'add' => [
+                                'label' => 'Adicionar',
+                                'route' => 'hashtag/default',
+                                'action' => 'add',
+                                'visible' => false
+                            ],
+                            'edit' => [
+                                'label' => 'Editar',
+                                'route' => 'hashtag/default',
+                                'action' => 'edit',
+                                'visible' => false
+                            ]
+                        ]
+                    ],
                 ]
             ],
         ]

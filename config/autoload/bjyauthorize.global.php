@@ -27,8 +27,12 @@ return [
                 ['route' => 'zfcuser/register', 'roles' => ['guest']],
 
                 ['route' => 'home', 'roles' => ['user']],
+
                 ['route' => 'campaign', 'roles' => ['user']],
                 ['route' => 'campaign/default', 'roles' => ['user']],
+
+                ['route' => 'hashtag', 'roles' => ['user']],
+                ['route' => 'hashtag/default', 'roles' => ['user']],
             ]
         ]
     ],

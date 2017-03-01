@@ -78,6 +78,36 @@ return array(
                     ]
                 ]
             ],
+            'hashtag' => [
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => [
+                    'route' => '/hashtag',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Hashtag',
+                        'action' => 'index',
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'default' => [
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => [
+                            'route' => '[[/:id]/:action][/page/:page][/order_by/:order_by][/:order]',
+                            'constraints' => [
+                                'action' => '(?!\bpage\b)(?!\border_by\b)[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9]+',
+                                'page' => '[0-9]+',
+                                'order_by' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'order' => 'asc|desc',
+                            ],
+                            'defaults' => [
+                                'controller' => 'Application\Controller\Hashtag',
+                                'action' => 'index',
+                            ]
+                        ]
+                    ]
+                ]
+            ],
         ),
     ),
     'service_manager' => array(
@@ -104,7 +134,8 @@ return array(
             'Application\Controller\Index' => Controller\IndexController::class,
         ),
         'factories' => array(
-            'Application\Controller\Campaign' => Factory\Controller\CampaignControllerFactory::class
+            'Application\Controller\Campaign' => Factory\Controller\CampaignControllerFactory::class,
+            'Application\Controller\Hashtag' => Factory\Controller\HashtagControllerFactory::class
         )
     ),
     'view_manager' => array(

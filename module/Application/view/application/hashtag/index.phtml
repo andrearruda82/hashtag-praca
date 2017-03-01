@@ -14,7 +14,7 @@ $this->headScript()
                 <div class="row clearfix">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="btn-group btn-group-lg pull-right" role="group" aria-label="Large button group">
-                            <a href="<?php echo $this->url('campaign/default', ['action' => 'add']);?>" class="btn bg-orange waves-effect waves-block">ADICIONAR</a>
+                            <a href="<?php echo $this->url('hashtag/default', ['action' => 'add']);?>" class="btn bg-orange waves-effect waves-block">ADICIONAR</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ $this->headScript()
                         <tr>
                             <td class="hidden-xs" width="190"><?php echo $this->dateFormat($entity->getCreatedAt(), IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT, 'pt_BR');?></td>
                             <td class="hidden-xs" width="190"><?php echo $this->dateFormat($entity->getUpdatedAt(), IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT, 'pt_BR') ;?></td>
-                            <td><?php echo $entity->getName();?></td>
+                            <td><?php echo $entity->getTag();?></td>
                             <td>
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,8 +43,8 @@ $this->headScript()
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="javascript:void(0);" class="bt_action" data-url="<?php echo $this->url('campaign/default', ['action' => 'edit', 'id' => $entity->getId()]);?>"><i class="material-icons">mode_edit</i> Editar</a>
-                                            <a href="javascript:void(0);" class="bt_action_confirm_delete" data-url="<?php echo $this->url('campaign/default', ['action' => 'delete', 'id' => $entity->getId()]);?>" data-object-delete="<?php echo $entity->getName();?>"><i class="material-icons">delete</i> Deletar</a>
+                                            <a href="javascript:void(0);" class="bt_action" data-url="<?php echo $this->url('hashtag/default', ['action' => 'edit', 'id' => $entity->getId()]);?>"><i class="material-icons">mode_edit</i> Editar</a>
+                                            <a href="javascript:void(0);" class="bt_action_confirm_delete" data-url="<?php echo $this->url('hashtag/default', ['action' => 'delete', 'id' => $entity->getId()]);?>" data-object-delete="<?php echo $entity->getTag();?>"><i class="material-icons">delete</i> Deletar</a>
                                         </li>
                                     </ul>
                                 </div>

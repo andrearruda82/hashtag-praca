@@ -3,10 +3,11 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+use Doctrine\ORM\EntityManager;
 
-class CampaignForm extends Form
+class HashtagForm extends Form
 {
-    public function __construct()
+    public function __construct(EntityManager $entityManager)
     {
         parent::__construct(null);
 
@@ -27,15 +28,15 @@ class CampaignForm extends Form
 
         $this->add([
             'type' => 'Zend\Form\Element\Text',
-            'name' => 'name',
+            'name' => 'tag',
             'options' => [
-                'label' => 'Nome',
+                'label' => 'Tag',
                 'label_attributes' => [
                     'class'  => 'form-label'
                 ]
             ],
             'attributes' => [
-                'id' => 'name',
+                'id' => 'tag',
                 'required' => true,
                 'class' => 'form-control',
                 'maxlength' => 45
@@ -43,36 +44,29 @@ class CampaignForm extends Form
         ]);
 
         $this->add([
-            'type' => 'Zend\Form\Element\Text',
-            'name' => 'period_start',
+            'name' => 'campaign',
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'options' => [
-                'label' => 'Data início',
+                'object_manager' => $entityManager,
+                'target_class' => 'Application\Entity\Campaign',
+                'property' => 'name',
+                'display_empty_item' => true,
+                'empty_item_label' => 'Escolha um campanha',
+                'find_method' => [
+                    'name' => 'findBy',
+                    'params' => [
+                        'criteria' => [],
+                        'orderBy' => ['name' => 'ASC'],
+                    ]
+                ],
+                'label' => 'Campanha',
                 'label_attributes' => [
                     'class'  => 'form-label'
                 ]
             ],
             'attributes' => [
-                'id' => 'period_start',
-                'required' => true,
-                'class' => 'form-control date',
-                'maxlength' => 10
-            ],
-        ]);
-
-        $this->add([
-            'type' => 'Zend\Form\Element\Text',
-            'name' => 'period_final',
-            'options' => [
-                'label' => 'Data final',
-                'label_attributes' => [
-                    'class' => 'form-label'
-                ]
-            ],
-            'attributes' => [
-                'id' => 'period_final',
-                'required' => true,
-                'class' => 'form-control date',
-                'maxlength' => 10
+                'id' => 'campaign',
+                'class' => 'form-control'
             ],
         ]);
     }

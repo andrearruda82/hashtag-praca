@@ -1,0 +1,61 @@
+<?php
+$this->headLink()
+    ->appendStylesheet($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap-select/css/bootstrap-select.min.css'))
+;
+
+$this->inlineScript()
+    ->prependFile($this->basePath('/assets/js/common/form.fields-focus.js'))
+;
+
+$this->headScript()
+    ->prependFile($this->basePath('/assets/bower_components/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.min.js'))
+;
+?>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>Hashtag</h2>
+            </div>
+            <div class="body">
+                <?php echo $this->form()->openTag($form) . PHP_EOL; ?>
+                <?php echo $this->formElement($form->get('csrf')) . PHP_EOL;?>
+                <?php echo $this->formElement($form->get('id')) . PHP_EOL;?>
+                <div class="row clearfix">
+                    <div class="col-sm-6">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <?php echo $this->formElement($form->get('tag')) . PHP_EOL;?>
+                                <?php echo $this->formLabel($form->get('tag')) . PHP_EOL; ?>
+                            </div>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('tag')) . PHP_EOL; ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <?php echo $this->formElement($form->get('campaign')) . PHP_EOL;?>
+                                <?php echo $this->formLabel($form->get('campaign')) . PHP_EOL; ?>
+                            </div>
+                            <?php echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<label class="error">')
+                                    ->setMessageSeparatorString('</label><label class="error">')
+                                    ->setMessageCloseString('</label>')
+                                    ->render($form->get('campaign')) . PHP_EOL; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn bg-orange btn-lg waves-effect pull-right">SALVAR</button>
+                    </div>
+                </div>
+                <?php echo $this->form()->closeTag() . PHP_EOL; ?>
+            </div>
+        </div>
+    </div>
+</div>

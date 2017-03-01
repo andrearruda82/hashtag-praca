@@ -2,11 +2,11 @@
 
 namespace Application\Service;
 
-use Application\Entity\Campaign;
+use Application\Entity\Hashtag;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Doctrine\ORM\EntityManager;
 
-class CampaignService
+class HashtagService
 {
     protected $doctrineObject;
     protected $entityManager;
@@ -19,26 +19,16 @@ class CampaignService
 
     public function create($data)
     {
-        if (isset($data['period_start']))
-        {
-            $data['period_start'] = \DateTime::createFromFormat('d/m/Y H:i:s', ($data['period_start'] . ' 00:00:00'));
-        }
-
-        if (isset($data['period_final']))
-        {
-            $data['period_final'] = \DateTime::createFromFormat('d/m/Y H:i:s', ($data['period_final'] . ' 00:00:00'));
-        }
-
-        $campaign = new Campaign();
-        $this->doctrineObject->hydrate($data, $campaign);
+        $hashtag = new Hashtag();
+        $this->doctrineObject->hydrate($data, $hashtag);
 
         $this->entityManager->getConnection()->beginTransaction();
         try {
-            $this->entityManager->persist($campaign);
+            $this->entityManager->persist($hashtag);
             $this->entityManager->flush();
             $this->entityManager->getConnection()->commit();
 
-            return $campaign;
+            return $hashtag;
         } catch (\Exception $e) {
             $this->entityManager->getConnection()->rollBack();
             return $e;
@@ -47,26 +37,16 @@ class CampaignService
 
     public function update($id, $data)
     {
-        if (isset($data['period_start']))
-        {
-            $data['period_start'] = \DateTime::createFromFormat('d/m/Y H:i:s', ($data['period_start'] . ' 00:00:00'));
-        }
-
-        if (isset($data['period_final']))
-        {
-            $data['period_final'] = \DateTime::createFromFormat('d/m/Y H:i:s', ($data['period_final'] . ' 00:00:00'));
-        }
-
-        $campaign = $this->entityManager->getReference('Application\Entity\Campaign', $id);
-        $this->doctrineObject->hydrate($data, $campaign);
+        $hashtag = $this->entityManager->getReference('Application\Entity\Hashtag', $id);
+        $this->doctrineObject->hydrate($data, $hashtag);
 
         $this->entityManager->getConnection()->beginTransaction();
         try {
-            $this->entityManager->persist($campaign);
+            $this->entityManager->persist($hashtag);
             $this->entityManager->flush();
             $this->entityManager->getConnection()->commit();
 
-            return $campaign;
+            return $hashtag;
         } catch (\Exception $e) {
             $this->entityManager->getConnection()->rollBack();
             return $e;
@@ -75,11 +55,11 @@ class CampaignService
 
     public function delete($id)
     {
-        $campaign = $this->entityManager->getReference('Application\Entity\Campaign', $id);
+        $hashtag = $this->entityManager->getReference('Application\Entity\Hashtag', $id);
 
         $this->entityManager->getConnection()->beginTransaction();
         try {
-            $this->entityManager->remove($campaign);
+            $this->entityManager->remove($hashtag);
             $this->entityManager->flush();
             $this->entityManager->getConnection()->commit();
 

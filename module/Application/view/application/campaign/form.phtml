@@ -11,26 +11,8 @@ $this->headScript()
 
 $this->inlineScript()
     ->prependFile($this->basePath('/assets/js/pages/campaign.js'))
+    ->prependFile($this->basePath('/assets/js/common/form.fields-focus.js'))
 ;
-
-$class = [];
-$inputs = ['name', 'period_start', 'period_final'];
-foreach($inputs as $key => $input)
-{
-    $class[$input] = [];
-
-    if ($this->formElementErrors($form->get($input)))
-    {
-        array_push($class[$input], 'error', 'focused');
-    }
-
-    if (! empty($form->get('id')->getValue()))
-    {
-        array_push($class[$input], 'focused');
-    }
-
-    $class[$input] = implode(' ', array_unique($class[$input]));
-}
 ?>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -45,7 +27,7 @@ foreach($inputs as $key => $input)
                 <div class="row clearfix">
                     <div class="col-sm-12">
                         <div class="form-group form-float">
-                            <div class="form-line <?php echo $class['name'];?>">
+                            <div class="form-line">
                                 <?php echo $this->formElement($form->get('name')) . PHP_EOL;?>
                                 <?php echo $this->formLabel($form->get('name')) . PHP_EOL; ?>
                             </div>
@@ -60,7 +42,7 @@ foreach($inputs as $key => $input)
                 <div class="row clearfix">
                     <div class="col-sm-6">
                         <div class="form-group form-float">
-                            <div class="form-line <?php echo $class['period_start'];?>">
+                            <div class="form-line">
                                 <?php echo $this->formElement($form->get('period_start')) . PHP_EOL;?>
                                 <?php echo $this->formLabel($form->get('period_start')) . PHP_EOL; ?>
                             </div>
@@ -73,7 +55,7 @@ foreach($inputs as $key => $input)
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group form-float">
-                            <div class="form-line <?php echo $class['period_final'];?>">
+                            <div class="form-line">
                                 <?php echo $this->formElement($form->get('period_final')) . PHP_EOL;?>
                                 <?php echo $this->formLabel($form->get('period_final')) . PHP_EOL; ?>
                             </div>
