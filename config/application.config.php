@@ -6,6 +6,7 @@ $config = array(
         'Zf2Whoops',
         'DoctrineModule', 'DoctrineORMModule',
         'ZfcBase', 'ZfcUser', 'ZfcUserDoctrineORM',
+        'SlmQueue', 'SlmQueueDoctrine',
         'EdpModuleLayouts',
         'Application',
     ),

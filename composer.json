@@ -16,7 +16,9 @@
         "zf-commons/zfc-user": "^1.4",
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
         "bjyoungblood/bjy-authorize": "1.4",
-        "evandotpro/edp-module-layouts": "^1.0"
+        "evandotpro/edp-module-layouts": "^1.0",
+        "slm/queue": "^0.7",
+        "slm/queue-doctrine": "^0.7"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "dev-master",

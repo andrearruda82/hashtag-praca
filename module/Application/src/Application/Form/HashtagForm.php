@@ -87,7 +87,7 @@ class HashtagForm extends Form
                 'required' => true,
                 'class' => 'form-control text-center',
                 'data-max' => 60,
-                'data-min' => 0,
+                'data-min' => 5,
                 'data-step' => 5,
                 'data-rule' => 'quantity'
             ],

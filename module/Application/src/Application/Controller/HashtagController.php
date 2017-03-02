@@ -2,6 +2,8 @@
 
 namespace Application\Controller;
 
+use SlmQueueDoctrine\Queue\DoctrineQueue;
+use SlmQueue\Job\JobPluginManager;
 use Application\Form\HashtagForm;
 use Application\Repository\HashtagRepository;
 use Application\Service\HashtagService;
@@ -17,6 +19,12 @@ class HashtagController extends AbstractActionController
     protected $hashtagForm;
     protected $hashtagService;
     protected $doctrineObject;
+
+    /** @var \SlmQueueDoctrine\Queue\DoctrineQueue $queue */
+    protected $queue;
+
+    /** @var \SlmQueue\Job\JobPluginManager $jobPluginManager */
+    protected $jobPluginManager;
 
     public function __construct(
         HashtagRepository $hashtagRepository,
@@ -59,6 +67,16 @@ class HashtagController extends AbstractActionController
                 $result = $this->hashtagService->create($data);
 
                 if ($result instanceof \Application\Entity\Hashtag) {
+
+                    $searchHashtagInstagramJob = $this->getJobPluginManager()->get('Application\Job\SearchHastagInstagramJob');
+                    $searchHashtagInstagramJob->setContent([
+                        'id' => $result->getId(),
+                        'campaign_id' => $result->getCampaign()->getId(),
+                    ]);
+                    $this->getQueue()->push($searchHashtagInstagramJob,[
+                        'delay' => $result->getRunTimeScript() . ' minutes'
+                    ]);
+
                     $this->flashMessenger()->addMessage([
                         'type' => 'success',
                         'title' => 'Yeah!',
@@ -156,5 +174,41 @@ class HashtagController extends AbstractActionController
         ]);
 
         return $this->redirect()->toRoute('hashtag');
+    }
+
+    /**
+     * @return DoctrineQueue
+     */
+    public function getQueue()
+    {
+        return $this->queue;
+    }
+
+    /**
+     * @param DoctrineQueue $queue
+     * @return HashtagController
+     */
+    public function setQueue($queue)
+    {
+        $this->queue = $queue;
+        return $this;
+    }
+
+    /**
+     * @return JobPluginManager
+     */
+    public function getJobPluginManager()
+    {
+        return $this->jobPluginManager;
+    }
+
+    /**
+     * @param JobPluginManager $jobPluginManager
+     * @return HashtagController
+     */
+    public function setJobPluginManager($jobPluginManager)
+    {
+        $this->jobPluginManager = $jobPluginManager;
+        return $this;
     }
 }

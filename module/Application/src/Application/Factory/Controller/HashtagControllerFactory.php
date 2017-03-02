@@ -22,6 +22,15 @@ class HashtagControllerFactory implements FactoryInterface
 
         $doctrineObject = new DoctrineObject($entityManager);
 
+        /** @var \SlmQueue\Job\JobPluginManager $jobPluginManager */
+        $jobPluginManager = $serviceManager->get('SlmQueue\Job\JobPluginManager');
+
+        /** @var \SlmQueue\Queue\QueuePluginManager $queueManager */
+        $queuePluginManager = $serviceManager->get('SlmQueue\Queue\QueuePluginManager');
+
+        /** @var \SlmQueueDoctrine\Queue\DoctrineQueue $queue */
+        $queue = $queuePluginManager->get('default');
+
         $hashtagRepository = $entityManager->getRepository('Application\Entity\Hashtag');
 
         $hashtagFormFilter = new HashtagFilter();
@@ -30,7 +39,11 @@ class HashtagControllerFactory implements FactoryInterface
 
         $hashtagService = new HashtagService($doctrineObject, $entityManager);
 
-        return new HashtagController($hashtagRepository, $hashtagForm, $hashtagService, $doctrineObject);
+        $hashtagController = new HashtagController($hashtagRepository, $hashtagForm, $hashtagService, $doctrineObject);
+        $hashtagController->setQueue($queue);
+        $hashtagController->setJobPluginManager($jobPluginManager);
+
+        return $hashtagController;
     }
 
 }
